@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IT Ticket Tracker</title>
+  <script src="ticket.js" defer></script>
+</head>
+<body>
+  <h1>IT Ticket Tracker</h1>
+  <p>Open tickets: <span id="open-count">0</span></p>
+  <form id="ticket-form">
+    <label for="ticket-title">Title</label>
+    <input type="text" id="ticket-title" name="title" required>
+    <p id="title-error" role="alert"></p>
+    <label for="ticket-description">Description</label>
+    <textarea id="ticket-description" name="description" rows="3"></textarea>
+    <label for="ticket-priority">Priority</label>
+    <select id="ticket-priority" name="priority">
+      <option selected value="low">Low</option>
+      <option value="medium">Medium</option>
+      <option value="high">High</option>
+    </select>
+    <button type="submit">Create ticket</button>
+  </form>
+  <ul id="ticket-list"></ul>
+</body>
+</html>
