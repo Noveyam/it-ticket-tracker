@@ -47,6 +47,9 @@ function renderTickets(tickets) {
     const priorityLabel = currentTicket.priority ?? "not set";
     const listItem = document.createElement("li");
     listItem.textContent = currentTicket.title + " - " + priorityLabel + " - " + currentTicket.status;
+    const descriptionElement = document.createElement("p");
+    descriptionElement.textContent = currentTicket.description ?? "";
+    listItem.appendChild(descriptionElement);
     ticketListElement.appendChild(listItem);
   }
 };
