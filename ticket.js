@@ -18,6 +18,14 @@ const secondTicket = {
 const savedTickets = localStorage.getItem("tickets");
 const tickets = savedTickets !== null? JSON.parse(savedTickets): [ticket, secondTicket];
 
+for (const currentTicket of tickets) {
+  if (!currentTicket.id) {
+    currentTicket.id = crypto.randomUUID();
+  }
+};
+
+localStorage.setItem("tickets", JSON.stringify(tickets));
+
 // Counts tickets whose status is open.
 function countOpen(tickets) {
   let openCount = 0;
@@ -50,6 +58,10 @@ function renderTickets(tickets) {
     const descriptionElement = document.createElement("p");
     descriptionElement.textContent = currentTicket.description ?? "";
     listItem.appendChild(descriptionElement);
+    const resolveButton = document.createElement("button");
+    resolveButton.type = "button";
+    resolveButton.textContent = "Resolve";
+    listItem.appendChild(resolveButton);
     ticketListElement.appendChild(listItem);
   }
 };
@@ -76,7 +88,8 @@ ticketFormElement.addEventListener("submit", function (event) {
     title: title,
     status: "open",
     priority: priority,
-    description: description
+    description: description,
+    id: crypto.randomUUID(),
   };
 
   tickets.push(newTicket);
