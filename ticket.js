@@ -53,14 +53,25 @@ function renderTickets(tickets) {
   ticketListElement.replaceChildren();
   for (const currentTicket of tickets) {
     const priorityLabel = currentTicket.priority ?? "not set";
+    
     const listItem = document.createElement("li");
     listItem.textContent = currentTicket.title + " - " + priorityLabel + " - " + currentTicket.status;
+    
     const descriptionElement = document.createElement("p");
     descriptionElement.textContent = currentTicket.description ?? "";
     listItem.appendChild(descriptionElement);
+    
     const resolveButton = document.createElement("button");
     resolveButton.type = "button";
     resolveButton.textContent = "Resolve";
+    resolveButton.addEventListener("click", function () {
+      currentTicket.status = "resolved";
+      localStorage.setItem("tickets", JSON.stringify(tickets));
+      renderTickets(tickets);
+      openCountElement.textContent = countOpen(tickets);
+    });
+    resolveButton.disabled = currentTicket.status === "resolved";
+
     listItem.appendChild(resolveButton);
     ticketListElement.appendChild(listItem);
   }
