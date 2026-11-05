@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>IT Ticket Tracker</title>
-  <script src="ticket.js" defer></script>
+  <script src="ticket.js?v=2" defer></script>
 </head>
 <body>
   <h1>IT Ticket Tracker</h1>
@@ -23,6 +23,12 @@
     </select>
     <button type="submit">Create ticket</button>
   </form>
+  <label for="status-filter">Filter by status</label>
+  <select id="status-filter">
+    <option selected value="all">All</option>
+    <option value="open">Open</option>
+    <option value="resolved">Resolved</option>
+  </select>
   <ul id="ticket-list"></ul>
 </body>
 </html>

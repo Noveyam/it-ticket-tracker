@@ -45,13 +45,19 @@ const ticketTitleElement = document.getElementById("ticket-title");
 const ticketErrorElement = document.getElementById("title-error");
 const ticketPriorityElement = document.getElementById("ticket-priority");
 const ticketDescriptionElement = document.getElementById("ticket-description");
+const ticketFilterElement = document.getElementById("status-filter");
 
 openCountElement.textContent = countOpen(tickets);
 
 // Displays all tickets
 function renderTickets(tickets) {
   ticketListElement.replaceChildren();
+  const selectedStatus = ticketFilterElement.value;
+
   for (const currentTicket of tickets) {
+    if (selectedStatus !== "all" && currentTicket.status !== selectedStatus) {
+      continue;
+    }
     const priorityLabel = currentTicket.priority ?? "not set";
     
     const listItem = document.createElement("li");
@@ -108,4 +114,8 @@ ticketFormElement.addEventListener("submit", function (event) {
   renderTickets(tickets);
   openCountElement.textContent = countOpen(tickets);
   ticketFormElement.reset();
+});
+
+ticketFilterElement.addEventListener("change", function () {
+  renderTickets(tickets);
 });
