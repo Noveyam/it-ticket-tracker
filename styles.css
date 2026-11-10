@@ -1,15 +1,37 @@
+html {
+  min-height: 100%;
+  background:
+  radial-gradient(ellipse 5rem 3rem at 3rem 8rem, white 98%, transparent),
+  radial-gradient(ellipse 4rem 4rem at 7rem 7rem, white 98%, transparent),
+  radial-gradient(ellipse 6rem 3rem at 10rem 9rem, white 98%, transparent),
+  linear-gradient(180deg, #78c7f2, #318bc2, #123b65);
+}
+
 body {
   font-family: Arial, sans-serif;
   line-height: 1.5;
   padding: 1rem;
   max-width: 48rem;
-  margin: 0 auto;
+  margin: 3rem auto 2rem;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 1.25rem;
+  box-shadow: 0 1rem 3rem rgba(25, 80, 120, 0.15);
+  box-sizing: border-box;
+  width: calc(100% - 3rem);
 }
 
 #ticket-form {
   display: grid;
   gap: 0.5rem;
   margin-bottom: 1.5rem;
+}
+
+#ticket-form button {
+  background: #176b9c;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
 }
 
 input,
@@ -29,4 +51,18 @@ button {
 #title-error {
   color: #b00020;
   margin: 0;
+}
+
+.resolve-button {
+  background: #187449;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.resolve-button:disabled {
+  background: #e2e8ed;
+  color: #526170;
+  cursor: default;
 }

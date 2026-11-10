@@ -69,6 +69,7 @@ function renderTickets(tickets) {
     
     const resolveButton = document.createElement("button");
     resolveButton.type = "button";
+    resolveButton.className = "resolve-button";
     resolveButton.textContent = "Resolve";
     resolveButton.addEventListener("click", function () {
       currentTicket.status = "resolved";
