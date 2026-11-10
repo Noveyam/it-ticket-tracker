@@ -66,3 +66,24 @@ button {
   color: #526170;
   cursor: default;
 }
+
+.priority-label {
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.4rem;
+  font-weight: bold;
+}
+
+.priority-low {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.priority-medium {
+  background: #fef08a;
+  color: #713f12;
+}
+
+.priority-high {
+  background: #fee2e2;
+  color: #991b1b;
+}

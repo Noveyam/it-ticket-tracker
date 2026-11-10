@@ -59,9 +59,14 @@ function renderTickets(tickets) {
       continue;
     }
     const priorityLabel = currentTicket.priority ?? "not set";
+    const priorityElement = document.createElement("span");
+    priorityElement.textContent = priorityLabel;
+    priorityElement.className = "priority-label priority-" + priorityLabel;
     
     const listItem = document.createElement("li");
-    listItem.textContent = currentTicket.title + " - " + priorityLabel + " - " + currentTicket.status;
+    listItem.textContent = currentTicket.title + " - ";
+    listItem.appendChild(priorityElement);
+    listItem.append(" - " + currentTicket.status);
     
     const descriptionElement = document.createElement("p");
     descriptionElement.textContent = currentTicket.description ?? "";
