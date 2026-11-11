@@ -25,6 +25,11 @@ try {
   if (!Array.isArray(tickets)) {
     throw new Error("Saved tickets must be an array.");
   }
+  for (const currentTicket of tickets) {
+    if (currentTicket === null || typeof currentTicket !== "object") {
+      throw new Error("Every ticket must be an object.");
+    }
+  }
 } catch (error) {
   tickets = [];
   storageLoadFailed = true;
