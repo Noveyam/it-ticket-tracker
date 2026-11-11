@@ -16,7 +16,16 @@ const secondTicket = {
 };
 
 const savedTickets = localStorage.getItem("tickets");
-const tickets = savedTickets !== null? JSON.parse(savedTickets): [ticket, secondTicket];
+let tickets;
+let storageLoadFailed = false;
+try {
+  tickets = savedTickets !== null
+    ? JSON.parse(savedTickets)
+    : [ticket, secondTicket];
+} catch (error) {
+  tickets = [];
+  storageLoadFailed = true;
+}
 
 for (const currentTicket of tickets) {
   if (!currentTicket.id) {
@@ -24,7 +33,9 @@ for (const currentTicket of tickets) {
   }
 };
 
-localStorage.setItem("tickets", JSON.stringify(tickets));
+if (!storageLoadFailed) {
+  localStorage.setItem("tickets", JSON.stringify(tickets));
+}
 
 // Counts tickets whose status is open.
 function countOpen(tickets) {
@@ -46,7 +57,12 @@ const ticketErrorElement = document.getElementById("title-error");
 const ticketPriorityElement = document.getElementById("ticket-priority");
 const ticketDescriptionElement = document.getElementById("ticket-description");
 const ticketFilterElement = document.getElementById("status-filter");
+const storageErrorElement = document.getElementById("storage-error");
 
+if (storageLoadFailed) {
+  storageErrorElement.textContent =
+    "Saved tickets couldn't be loaded. Creating tickets is paused to protect your saved data.";
+}
 openCountElement.textContent = countOpen(tickets);
 
 // Displays all tickets
@@ -94,10 +110,13 @@ renderTickets(tickets);
 // Handle form submission.
 ticketFormElement.addEventListener("submit", function (event) {
   event.preventDefault();
+
+  if (storageLoadFailed) {
+    return;
+  }
   const title = ticketTitleElement.value.trim();
   const description = ticketDescriptionElement.value.trim();
   const priority = ticketPriorityElement.value;
-
   if (title === "") {
     ticketErrorElement.textContent = "Enter a title that is not only spaces.";
     ticketTitleElement.value = "";
@@ -114,7 +133,6 @@ ticketFormElement.addEventListener("submit", function (event) {
     description: description,
     id: crypto.randomUUID(),
   };
-
   tickets.push(newTicket);
   localStorage.setItem("tickets", JSON.stringify(tickets));
   renderTickets(tickets);

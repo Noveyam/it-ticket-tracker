@@ -48,7 +48,8 @@ button {
   margin-bottom: 1rem;
 }
 
-#title-error {
+#title-error,
+#storage-error {
   color: #b00020;
   margin: 0;
 }
