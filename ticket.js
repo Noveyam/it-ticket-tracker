@@ -22,6 +22,9 @@ try {
   tickets = savedTickets !== null
     ? JSON.parse(savedTickets)
     : [ticket, secondTicket];
+  if (!Array.isArray(tickets)) {
+    throw new Error("Saved tickets must be an array.");
+  }
 } catch (error) {
   tickets = [];
   storageLoadFailed = true;
