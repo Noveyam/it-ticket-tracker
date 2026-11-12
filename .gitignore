@@ -1,4 +1,8 @@
 # macOS folder metadata
 .DS_Store
 
+# Local learning handoff
 HANDOFF.md
+
+# Local editor settings
+.vscode/
