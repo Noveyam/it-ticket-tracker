@@ -107,8 +107,32 @@ function renderTickets(tickets) {
       openCountElement.textContent = countOpen(tickets);
     });
     resolveButton.disabled = currentTicket.status === "resolved";
-
     listItem.appendChild(resolveButton);
+
+    const deleteButton = document.createElement("button");
+    deleteButton.type = "button";
+    deleteButton.className = "delete-button";
+    deleteButton.textContent = "Delete";
+
+    deleteButton.addEventListener("click", function () {
+      const shouldDelete = window.confirm("Delete this ticket?");
+      if (!shouldDelete) {
+        return;
+      }
+      const ticketIndex = tickets.indexOf(currentTicket);
+
+      if (ticketIndex === -1) {
+        return;
+      }
+
+      tickets.splice(ticketIndex, 1);
+      localStorage.setItem("tickets", JSON.stringify(tickets));
+      renderTickets(tickets);
+      openCountElement.textContent = countOpen(tickets);
+    });
+
+    listItem.appendChild(deleteButton);
+
     ticketListElement.appendChild(listItem);
   }
 };
