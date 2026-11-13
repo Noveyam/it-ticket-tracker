@@ -29,6 +29,11 @@ try {
     if (currentTicket === null || typeof currentTicket !== "object") {
       throw new Error("Every ticket must be an object.");
     }
+    if (
+      typeof currentTicket.title !== "string" || currentTicket.title.trim() === ""
+    ) {
+      throw new Error("Every ticket must have a title.");
+    }
   }
 } catch (error) {
   tickets = [];
