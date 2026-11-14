@@ -25,14 +25,23 @@ try {
   if (!Array.isArray(tickets)) {
     throw new Error("Saved tickets must be an array.");
   }
+
+  // Validate each saved ticket.
   for (const currentTicket of tickets) {
     if (currentTicket === null || typeof currentTicket !== "object") {
       throw new Error("Every ticket must be an object.");
     }
     if (
-      typeof currentTicket.title !== "string" || currentTicket.title.trim() === ""
+      typeof currentTicket.title !== "string" ||
+      currentTicket.title.trim() === ""
     ) {
       throw new Error("Every ticket must have a title.");
+    }
+    if (
+      typeof currentTicket.status !== "string" ||
+      !["open", "resolved"].includes(currentTicket.status)
+    ) {
+      throw new Error("Every ticket must have a valid status.");
     }
   }
 } catch (error) {
